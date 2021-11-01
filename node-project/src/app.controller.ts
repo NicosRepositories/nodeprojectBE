@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { get } from 'http';
 import { AppService } from './app.service';
 
@@ -27,5 +27,14 @@ export class ILYController {
   @Get()
   getLove(): string {
     return this.appService.getLove();
+  }
+}
+
+@Controller('post-request')
+export class PostController {
+  constructor(private readonly appService: AppService) {}
+  @Post(':name')
+  PostLove(@Param('name') name: string) {
+    return this.appService.PostLove(name);
   }
 }

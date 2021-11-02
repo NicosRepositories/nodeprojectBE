@@ -16,7 +16,7 @@ describe('EmployeeController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(employeeController.getHello()).toBe('Hello World!');
+      expect(employeeController.getAllEmployees()).toBe('Hello World!');
     });
   });
 });

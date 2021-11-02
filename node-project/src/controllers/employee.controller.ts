@@ -7,7 +7,7 @@ export class EmployeeController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
+  getAllEmployees(): string {
     return this.appService.getHello();
   }
 }

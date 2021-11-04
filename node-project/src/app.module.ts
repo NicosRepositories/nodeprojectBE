@@ -7,6 +7,8 @@ import {
 } from './app.controller';
 import { EmployeeController } from './controllers/employee.controller';
 import { AppService } from './app.service';
+import { EmployeeService } from './services/employee.service';
+import { EmployeeMapper } from './mapper/employee.mapper';
 
 @Module({
   imports: [],
@@ -17,6 +19,13 @@ import { AppService } from './app.service';
     PostController,
     EmployeeController,
   ],
-  providers: [AppService],
+  providers: [
+    AppService,
+    EmployeeService,
+    {
+      provide: 'EmployeeRepository',
+      useClass: EmployeeMapper,
+    },
+  ],
 })
 export class AppModule {}

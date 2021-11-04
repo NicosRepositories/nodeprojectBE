@@ -9,5 +9,9 @@ export class EmployeeController {
   @Get()
   getAllEmployees(): string {
     return this.appService.getHello();
+
+    //connect to db
+
+    //select-Query
   }
 }

@@ -8,6 +8,7 @@ export interface Employee {
   age: string;
   mainOffice: string;
   yearsAtEnersis: string;
+  happiness: string;
   jobID: string;
 }
 /** This class combines the information of the employee itself with the more detailed infos about the Job */

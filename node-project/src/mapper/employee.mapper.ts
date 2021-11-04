@@ -9,8 +9,24 @@ export class EmployeeMapper implements EmployeeRepository {
   searchByName(id: string): Promise<Employee> {
     throw new Error('Method not implemented.');
   }
-  getAllEmployees(): Promise<Employee[]> {
-    throw new Error('Method not implemented.');
+  async getAllEmployees(): Promise<Employee[]> {
+    const queryResult: any = await this.dbConnection.reader.query(
+      'SELECT * FROM ' + process.env.DEV_DATABASE_URL,
+    );
+    const requestArray: Employee[] = queryResult[0].map(
+      (employee: any): Employee => ({
+        firstName: employee.firstName,
+        employeeID: employee.employeeID,
+        lastName: employee.lastName,
+        nickName: employee.nickName,
+        age: employee.age,
+        mainOffice: employee.mainOffice,
+        yearsAtEnersis: employee.yearsAtEnersis,
+        happiness: employee.happiness,
+        jobID: employee.jobID,
+      }),
+    );
+    return requestArray;
   }
   createEmployee(employee: Employee): Promise<string> {
     throw new Error('Method not implemented.');

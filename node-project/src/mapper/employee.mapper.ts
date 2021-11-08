@@ -11,7 +11,7 @@ export class EmployeeMapper implements EmployeeRepository {
   }
   async getAllEmployees(): Promise<Employee[]> {
     const queryResult: any = await this.dbConnection.reader.query(
-      'SELECT * FROM ' + process.env.DEV_DATABASE_URL,
+      'SELECT * FROM public.employees',
     );
     const requestArray: Employee[] = queryResult[0].map(
       (employee: any): Employee => ({

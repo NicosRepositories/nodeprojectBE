@@ -19,11 +19,11 @@ export class EmployeeService {
     return employee;
   }
 
-  async searchByName(lastName): Promise<EmployeeDetail[]> {
+  async searchByName(lastName: any): Promise<EmployeeDetail[]> {
     throw new Error('Method not implemented.');
   }
 
-  async createEmployee(EmployeeDetail) {
+  async createEmployee(EmployeeDetail: any) {
     throw new Error('Method not implemented.');
   }
 }

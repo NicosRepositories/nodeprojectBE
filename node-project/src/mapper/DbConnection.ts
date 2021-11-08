@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { Sequelize } from 'sequelize';
+const Sequelize = require('sequelize');
+import * as dbConfig from '../../config/db.connection.json';
 
 @Injectable()
 export class DbConnection {
-  static reader: any;
   constructor(
-    public readonly reader: Sequelize,
-    public readonly writer: Sequelize,
+    public readonly reader = new Sequelize(dbConfig.common),
+    public readonly writer = new Sequelize(dbConfig.common),
   ) {}
 }

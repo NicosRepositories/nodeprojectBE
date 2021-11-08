@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { Employee } from 'src/domain/employee';
 import { EmployeeRepository } from 'src/services/employee.repository';
-import { DbConnection } from './DbConnection';
+import { DbConnection } from '../mapper/DbConnection';
 
 @Injectable()
 export class EmployeeMapper implements EmployeeRepository {
   constructor(private dbConnection: DbConnection) {}
+
   searchByName(id: string): Promise<Employee> {
     throw new Error('Method not implemented.');
   }

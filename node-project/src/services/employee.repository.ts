@@ -1,6 +1,8 @@
 import { Employee } from 'src/domain/employee';
+import { Job } from 'src/domain/job';
 
 export interface EmployeeRepository {
+  getJob(jobID: string): Promise<Job>;
   searchByName(id: string): Promise<Employee>;
   getAllEmployees(): Promise<Employee[]>;
   //following function gets Implemented if there is enough time for it.

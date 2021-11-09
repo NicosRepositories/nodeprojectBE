@@ -2,9 +2,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 import { EmployeeRepository } from 'src/services/employee.repository';
 import { Employee, EmployeeDetail } from 'src/domain/employee';
-import { InjectConnection } from '@nestjs/sequelize'
+import { InjectConnection } from '@nestjs/sequelize';
 import { Connections } from 'src/database';
-import { QueryTypes, Sequelize } from "sequelize";
+import { QueryTypes, Sequelize } from 'sequelize';
+import { Job } from 'src/domain/job';
 
 dotenv.config();
 
@@ -15,13 +16,23 @@ export class EmployeeService {
     @Inject('EmployeeRepository')
     private readonly employeeRepository: EmployeeRepository,
     @InjectConnection(Connections.READER)
-    private sequelize: Sequelize
+    private sequelize: Sequelize,
   ) {}
 
-  async getAllEmployees(): Promise<Employee[]> {
-    const employee = await this.employeeRepository.getAllEmployees();
+  async getAllEmployees(): Promise<EmployeeDetail[]> {
+    const employees: Employee[] =
+      await this.employeeRepository.getAllEmployees();
+    const employeeDetails: EmployeeDetail[] = [];
 
-    return employee;
+    for (const employee of employees) {
+      employeeDetails.push(
+        new EmployeeDetail(
+          employee,
+          await this.employeeRepository.getJob(employee.jobID),
+        ),
+      );
+    }
+    return employeeDetails;
   }
 
   async searchByName(lastName: any): Promise<EmployeeDetail[]> {
@@ -30,5 +41,9 @@ export class EmployeeService {
 
   async createEmployee(EmployeeDetail: any) {
     throw new Error('Method not implemented.');
+  }
+
+  async getJob(jobID: number): Promise<Job> {
+    return new Job(2, 'Praktikant IMS', 'Muss lernen.');
   }
 }

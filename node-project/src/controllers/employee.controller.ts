@@ -3,9 +3,8 @@ import { IntegerDataType } from 'sequelize/types';
 import { Employee, EmployeeDetail } from 'src/domain/employee';
 import { EmployeeService } from 'src/services/employee.service';
 
-
 /** The object which is used in the controller and FE for getting info of Employees */
-export class EmployeesDto {
+export class EmployeeDto {
   public employeeID: string;
   public firstName: string;
   public lastName: string;
@@ -14,9 +13,9 @@ export class EmployeesDto {
   public mainOffice: string;
   public timeAtEnersis: number;
   public happiness: number;
-  public jobID: string;
+  public jobID: number;
   public job: {
-    jobId: string;
+    jobId: number;
     name: string;
     descritpion: string;
   };
@@ -43,8 +42,9 @@ export class EmployeeController {
 
   @Get()
   async getAllEmployees() {
-    const employees: Employee[] = await this.employeeService.getAllEmployees();
-    return employees.map((employee) => )
+    const employees: EmployeeDetail[] =
+      await this.employeeService.getAllEmployees();
+    return employees.map((employee) => new EmployeeDto(employee));
 
     //connect to db
 

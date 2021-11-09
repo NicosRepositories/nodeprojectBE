@@ -9,7 +9,7 @@ export interface Employee {
   mainOffice: string;
   yearsAtEnersis: number;
   happiness: number;
-  jobID: string;
+  jobID: number;
 }
 /** This class combines the information of the employee itself with the more detailed infos about the Job */
 export class EmployeeDetail {

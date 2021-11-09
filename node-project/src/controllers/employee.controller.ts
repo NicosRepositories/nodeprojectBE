@@ -1,7 +1,8 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiParam } from '@nestjs/swagger';
 import { IntegerDataType } from 'sequelize/types';
 import { Employee, EmployeeDetail } from 'src/domain/employee';
-import { EmployeeService } from 'src/services/employee.service';
+import { EmployeeService, RequestPayload } from 'src/services/employee.service';
 
 /** The object which is used in the controller and FE for getting info of Employees */
 export class EmployeeDto {
@@ -45,9 +46,13 @@ export class EmployeeController {
     const employees: EmployeeDetail[] =
       await this.employeeService.getAllEmployees();
     return employees.map((employee) => new EmployeeDto(employee));
+  }
 
-    //connect to db
-
-    //select-Query
+  @Post('create-employee')
+  @ApiParam({ name: 'requestPayload', required: true })
+  async createRequest(@Body() requestPayload: RequestPayload) {
+    return {
+      employeeId: await this.employeeService.createEmployee(requestPayload),
+    };
   }
 }

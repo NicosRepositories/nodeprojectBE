@@ -20,6 +20,7 @@ import * as dbConfig from '../config/db.connection.json';
 import { DatabaseModule } from './database/database.module';
 //import { DbNames } from "./mapper/DbNames";
 import { Sequelize } from 'sequelize';
+import { EmployeeFactory } from './domain/employee.factory';
 
 @Module({
   imports: [HttpModule, SequelizeModule, DatabaseModule],
@@ -30,6 +31,10 @@ import { Sequelize } from 'sequelize';
     {
       provide: 'EmployeeRepository',
       useClass: EmployeeMapper,
+    },
+    {
+      provide: 'IEmployeeFactory',
+      useClass: EmployeeFactory,
     },
   ],
 })

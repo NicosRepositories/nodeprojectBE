@@ -13,9 +13,6 @@ export class EmployeeMapper implements EmployeeRepository {
     @InjectConnection(Connections.READER)
     private sequelize: Sequelize,
   ) {}
-  searchByName(id: string): Promise<Employee> {
-    throw new Error('Method search not implemented.');
-  }
   async getAllEmployees(): Promise<Employee[]> {
     const queryResult: any = await this.sequelize.query(
       'SELECT * FROM public.employees',
@@ -41,5 +38,18 @@ export class EmployeeMapper implements EmployeeRepository {
 
   async getJob(jobID: number): Promise<Job> {
     throw new Error('Method getJob is not implemented');
+  }
+
+  async doesEmployeeExist(requestDetails: {
+    firstName: string;
+    lastName: string;
+  }): Promise<boolean> {
+    throw new Error('Method not implemented.');
+  }
+  async upsertRequest(employee: Employee): Promise<string> {
+    throw new Error('Method not implemented.');
+  }
+  async searchByName(id: string): Promise<Employee> {
+    throw new Error('Method search not implemented.');
   }
 }

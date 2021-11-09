@@ -4,13 +4,13 @@ import { Connections } from 'src/database';
 import { Employee } from 'src/domain/employee';
 import { EmployeeRepository } from 'src/services/employee.repository';
 // import { DbConnection } from './DbConnection';
-import { QueryTypes, Sequelize } from "sequelize";
+import { QueryTypes, Sequelize } from 'sequelize';
 
 @Injectable()
 export class EmployeeMapper implements EmployeeRepository {
-  constructor(    
+  constructor(
     @InjectConnection(Connections.READER)
-  private sequelize: Sequelize
+    private sequelize: Sequelize,
   ) {}
   searchByName(id: string): Promise<Employee> {
     throw new Error('Method not implemented.');

@@ -19,6 +19,7 @@ import * as dbConfig from '../config/db.connection.json';
 // import { DbConnection } from './mapper/DbConnection';
 import { DatabaseModule } from './database/database.module';
 //import { DbNames } from "./mapper/DbNames";
+import { Sequelize } from 'sequelize';
 
 @Module({
   imports: [HttpModule, SequelizeModule, DatabaseModule],

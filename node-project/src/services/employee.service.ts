@@ -2,6 +2,9 @@ import { Inject, Injectable } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 import { EmployeeRepository } from 'src/services/employee.repository';
 import { Employee, EmployeeDetail } from 'src/domain/employee';
+import { InjectConnection } from '@nestjs/sequelize'
+import { Connections } from 'src/database';
+import { QueryTypes, Sequelize } from "sequelize";
 
 dotenv.config();
 
@@ -11,6 +14,8 @@ export class EmployeeService {
   constructor(
     @Inject('EmployeeRepository')
     private readonly employeeRepository: EmployeeRepository,
+    @InjectConnection(Connections.READER)
+    private sequelize: Sequelize
   ) {}
 
   async getAllEmployees(): Promise<Employee[]> {

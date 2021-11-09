@@ -14,13 +14,15 @@ import { EmployeeMapper } from 'src/mapper/employee.mapper';
 //import { EmployeeFactory } from "src/domain/employee";
 //import { RequestManagementController } from "src/controllers/request-management.controller";
 import { SequelizeModule } from '@nestjs/sequelize';
-import { DbConnection } from './mapper/DbConnection';
+// import { DbConnection } from 'src/mapper/DbConnection';
 import * as dbConfig from '../config/db.connection.json';
+// import { DbConnection } from './mapper/DbConnection';
+import { DatabaseModule } from './database/database.module';
 //import { DbNames } from "./mapper/DbNames";
 import { Sequelize } from 'sequelize';
 
 @Module({
-  imports: [HttpModule, SequelizeModule, DbConnection, Sequelize],
+  imports: [HttpModule, SequelizeModule, DatabaseModule],
   controllers: [AppController, EmployeeController],
   providers: [
     AppService,

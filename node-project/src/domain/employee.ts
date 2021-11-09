@@ -5,10 +5,10 @@ export interface Employee {
   employeeID: string;
   lastName: string;
   nickName: string;
-  age: string;
+  age: number;
   mainOffice: string;
-  yearsAtEnersis: string;
-  happiness: string;
+  yearsAtEnersis: number;
+  happiness: number;
   jobID: string;
 }
 /** This class combines the information of the employee itself with the more detailed infos about the Job */

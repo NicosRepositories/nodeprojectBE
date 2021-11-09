@@ -5,6 +5,7 @@ import { Employee } from 'src/domain/employee';
 import { EmployeeRepository } from 'src/services/employee.repository';
 // import { DbConnection } from './DbConnection';
 import { QueryTypes, Sequelize } from 'sequelize';
+import { Job } from 'src/domain/job';
 
 @Injectable()
 export class EmployeeMapper implements EmployeeRepository {
@@ -13,7 +14,7 @@ export class EmployeeMapper implements EmployeeRepository {
     private sequelize: Sequelize,
   ) {}
   searchByName(id: string): Promise<Employee> {
-    throw new Error('Method not implemented.');
+    throw new Error('Method search not implemented.');
   }
   async getAllEmployees(): Promise<Employee[]> {
     const queryResult: any = await this.sequelize.query(
@@ -34,7 +35,11 @@ export class EmployeeMapper implements EmployeeRepository {
     );
     return requestArray;
   }
-  createEmployee(employee: Employee): Promise<string> {
+  async createEmployee(employee: Employee): Promise<string> {
     throw new Error('Method not implemented.');
+  }
+
+  async getJob(jobID: number): Promise<Job> {
+    throw new Error('Method getJob is not implemented');
   }
 }

@@ -42,16 +42,7 @@ export class EmployeeMapper implements EmployeeRepository {
   async createEmployee(employee: Employee): Promise<string> {
     const queryResult = await this.sequelize.query(
       `INSERT INTO public.employees (firstName, employeeID,  lastName, nickName, age, mainOffice, yearsAtEnersis, happiness, jobID) 
-         VALUES (:ID, :FIRSTNAME, :LASTNAME, :NICKNAME, :AGE, :OFFICE, :YEARS, :HAPPINESS, :JOBID)
-         ON CONFLICT (lastName)
-         DO UPDATE SET 
-           firstname = :FIRSTNAME,
-           nickName = :NICKNAME,
-           age = :AGE,
-           mainOffice = :OFFICE,
-           happiness = :HAPPINESS, 
-           jobID = :JOBID
-       RETURNING lastName`,
+         VALUES (:ID, :FIRSTNAME, :LASTNAME, :NICKNAME, :AGE, :OFFICE, :YEARS, :HAPPINESS, :JOBID)`,
 
       {
         replacements: {

@@ -23,8 +23,8 @@ export class EmployeeMapper implements EmployeeRepository {
     );
     const requestArray: Employee[] = queryResult[0].map(
       (employee: any): Employee => ({
-        firstName: employee.firstName,
         employeeID: employee.employeeID,
+        firstName: employee.firstName,
         lastName: employee.lastName,
         nickName: employee.nickName,
         age: employee.age,

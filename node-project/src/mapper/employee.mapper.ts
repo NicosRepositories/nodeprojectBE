@@ -44,7 +44,21 @@ export class EmployeeMapper implements EmployeeRepository {
     firstName: string;
     lastName: string;
   }): Promise<boolean> {
-    throw new Error('Method not implemented.');
+    const queryResult: any = await this.sequelize.query(
+      `SELECT * FROM public.employees
+         WHERE UPPER(firstName)=UPPER(:firstName)
+            OR UPPER(lastName)=UPPER(:lastName)`,
+      {
+        replacements: {
+          firstName: requestDetails.firstName,
+          lastName: requestDetails.lastName,
+        },
+      },
+    );
+    if (queryResult[0].length == 0) {
+      return false;
+    }
+    return true;
   }
   async upsertRequest(employee: Employee): Promise<string> {
     throw new Error('Method not implemented.');

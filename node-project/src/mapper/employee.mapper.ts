@@ -24,12 +24,12 @@ export class EmployeeMapper implements EmployeeRepository {
     const requestArray: Employee[] = queryResult[0].map(
       (employee: any): Employee => ({
         employeeID: employee.employeeID,
-        firstName: employee.firstName,
-        lastName: employee.lastName,
-        nickName: employee.nickName,
+        firstName: employee.firstname,
+        lastName: employee.lastname,
+        nickName: employee.nickname,
         age: employee.age,
-        mainOffice: employee.mainOffice,
-        yearsAtEnersis: employee.yearsAtEnersis,
+        mainOffice: employee.mainoffice,
+        yearsAtEnersis: employee.timeatenersis,
         happiness: employee.happiness,
         jobID: employee.jobID,
       }),
@@ -40,9 +40,8 @@ export class EmployeeMapper implements EmployeeRepository {
   /** --------------------------------------------------------------- */
 
   async createEmployee(employee: Employee): Promise<string> {
-    console.log(employee);
     const queryResult = await this.sequelize.query(
-      `INSERT INTO public.employees ("employeeID", firstName, lastName, nickName, age, mainOffice, timeatenersis, happiness, "jobID") 
+      `INSERT INTO public.employees ("employeeID", firstname, lastname, nickname, age, mainoffice, timeatenersis, happiness, "jobID") 
          VALUES (:ID, :FIRSTNAME, :LASTNAME, :NICKNAME, :AGE, :OFFICE, :YEARS, :HAPPINESS, :JOBID)`,
 
       {
@@ -72,25 +71,8 @@ export class EmployeeMapper implements EmployeeRepository {
 
   /** --------------------------------------------------------------- */
 
-  async doesEmployeeExist(requestDetails: {
-    firstName: string;
-    lastName: string;
-  }): Promise<boolean> {
-    const queryResult: any = await this.sequelize.query(
-      `SELECT * FROM public.employees
-         WHERE UPPER(firstName)=UPPER(:firstName)
-            OR UPPER(lastName)=UPPER(:lastName)`,
-      {
-        replacements: {
-          firstName: requestDetails.firstName,
-          lastName: requestDetails.lastName,
-        },
-      },
-    );
-    if (queryResult[0].length == 0) {
-      return false;
-    }
-    return true;
+  async doesEmployeeExist() {
+    return false;
   }
 
   /** --------------------------------------------------------------- */

@@ -6,7 +6,7 @@ import { EmployeeService, RequestPayload } from 'src/services/employee.service';
 
 /** The object which is used in the controller and FE for getting info of Employees */
 export class EmployeeDto {
-  public employeeID: string;
+  public employeeID: number;
   public firstName: string;
   public lastName: string;
   public nickName: string;

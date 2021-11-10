@@ -1,7 +1,7 @@
 import { Job } from './job';
 
 export interface Employee {
-  employeeID: string;
+  employeeID: number;
   firstName: string;
   lastName: string;
   nickName: string;

@@ -2,7 +2,7 @@ import { Employee } from './employee';
 
 export interface IEmployeeFactory {
   create(
-    employeeID: string,
+    employeeID: number,
     firstName: string,
     lastName: string,
     nickName: string,

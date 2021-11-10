@@ -3,10 +3,7 @@ import { Job } from 'src/domain/job';
 import { RequestPayload } from './employee.service';
 
 export interface EmployeeRepository {
-  doesEmployeeExist(requestDetails: {
-    firstName: string;
-    lastName: string;
-  }): Promise<boolean>;
+  doesEmployeeExist(): Promise<boolean>;
   getJob(jobID: number): Promise<Job>;
   searchByName(id: string): Promise<Employee>;
   getAllEmployees(): Promise<Employee[]>;

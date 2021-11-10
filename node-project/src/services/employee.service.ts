@@ -16,8 +16,8 @@ import { IEmployeeFactory } from './../domain/iEmployeeFactory';
 dotenv.config();
 
 export interface RequestPayload {
+  employeeID: number;
   firstName: string;
-  employeeID: string;
   lastName: string;
   nickName: string;
   age: number;
@@ -53,6 +53,7 @@ export class EmployeeService {
         ),
       );
     }
+
     return employeeDetails;
   }
 
@@ -67,7 +68,7 @@ export class EmployeeService {
   async createEmployee(requestPayload: RequestPayload): Promise<string> {
     this.checkParameters(requestPayload);
 
-    if (await this.employeeRepository.doesEmployeeExist(requestPayload)) {
+    if (await this.employeeRepository.doesEmployeeExist()) {
       throw new ConflictException('this Employee already exists');
     }
 

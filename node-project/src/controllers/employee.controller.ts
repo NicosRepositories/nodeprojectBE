@@ -48,9 +48,9 @@ export class EmployeeController {
     return employees.map((employee) => new EmployeeDto(employee));
   }
 
-  @Post('create-employee')
+  @Post()
   @ApiParam({ name: 'requestPayload', required: true })
-  async createRequest(@Body() requestPayload: RequestPayload) {
+  async createEmployee(@Body() requestPayload: RequestPayload) {
     return {
       employeeId: await this.employeeService.createEmployee(requestPayload),
     };

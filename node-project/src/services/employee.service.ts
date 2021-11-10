@@ -100,7 +100,10 @@ export class EmployeeService {
       !!requestPayload.jobID;
 
     if (!hasAllParameters) {
-      throw new BadRequestException('missing parameters');
+      throw new BadRequestException(
+        'missing parameters. your parameters are: ' +
+          JSON.stringify(requestPayload),
+      );
     }
     return true;
   }

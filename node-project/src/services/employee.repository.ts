@@ -12,5 +12,5 @@ export interface EmployeeRepository {
     mail: string;
     username: string;
   }): Promise<boolean>;*/
-  createEmployee(employee: Employee): Promise<string>;
+  createEmployee(employee: Employee): any;
 }

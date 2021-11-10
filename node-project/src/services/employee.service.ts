@@ -83,7 +83,7 @@ export class EmployeeService {
       requestPayload.jobID,
     );
 
-    const employeeId = await this.employeeRepository.upsertRequest(employee);
+    const employeeId = await this.employeeRepository.createEmployee(employee);
     return employeeId;
   }
 

@@ -6,6 +6,7 @@ import { EmployeeRepository } from 'src/services/employee.repository';
 // import { DbConnection } from './DbConnection';
 import { QueryTypes, Sequelize } from 'sequelize';
 import { Job } from 'src/domain/job';
+import { emitWarning } from 'process';
 
 @Injectable()
 export class EmployeeMapper implements EmployeeRepository {
@@ -13,6 +14,9 @@ export class EmployeeMapper implements EmployeeRepository {
     @InjectConnection(Connections.READER)
     private sequelize: Sequelize,
   ) {}
+
+  /** --------------------------------------------------------------- */
+
   async getAllEmployees(): Promise<Employee[]> {
     const queryResult: any = await this.sequelize.query(
       'SELECT * FROM public.employees',
@@ -32,13 +36,49 @@ export class EmployeeMapper implements EmployeeRepository {
     );
     return requestArray;
   }
+
+  /** --------------------------------------------------------------- */
+
   async createEmployee(employee: Employee): Promise<string> {
-    throw new Error('Method not implemented.');
+    const queryResult = await this.sequelize.query(
+      `INSERT INTO public.employees (firstName, employeeID,  lastName, nickName, age, mainOffice, yearsAtEnersis, happiness, jobID) 
+         VALUES (:ID, :FIRSTNAME, :LASTNAME, :NICKNAME, :AGE, :OFFICE, :YEARS, :HAPPINESS, :JOBID)
+         ON CONFLICT (lastName)
+         DO UPDATE SET 
+           firstname = :FIRSTNAME,
+           nickName = :NICKNAME,
+           age = :AGE,
+           mainOffice = :OFFICE,
+           happiness = :HAPPINESS, 
+           jobID = :JOBID
+       RETURNING lastName`,
+
+      {
+        replacements: {
+          ID: employee.employeeID,
+          FIRSTNAME: employee.firstName,
+          LASTNAME: employee.lastName,
+          NICKNAME: employee.nickName,
+          AGE: employee.age,
+          OFFICE: employee.mainOffice,
+          YEARS: employee.yearsAtEnersis,
+          HAPPINESS: employee.happiness,
+          JOBID: employee.jobID,
+        },
+      },
+    );
+
+    const modifiedRows = queryResult[0] as { lastname: string }[];
+    return modifiedRows[0].lastname;
   }
+
+  /** --------------------------------------------------------------- */
 
   async getJob(jobID: number): Promise<Job> {
     throw new Error('Method getJob is not implemented');
   }
+
+  /** --------------------------------------------------------------- */
 
   async doesEmployeeExist(requestDetails: {
     firstName: string;
@@ -60,9 +100,9 @@ export class EmployeeMapper implements EmployeeRepository {
     }
     return true;
   }
-  async upsertRequest(employee: Employee): Promise<string> {
-    throw new Error('Method not implemented.');
-  }
+
+  /** --------------------------------------------------------------- */
+
   async searchByName(id: string): Promise<Employee> {
     throw new Error('Method search not implemented.');
   }

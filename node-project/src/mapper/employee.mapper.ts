@@ -40,8 +40,9 @@ export class EmployeeMapper implements EmployeeRepository {
   /** --------------------------------------------------------------- */
 
   async createEmployee(employee: Employee): Promise<string> {
+    console.log(employee);
     const queryResult = await this.sequelize.query(
-      `INSERT INTO public.employees (firstName, employeeID,  lastName, nickName, age, mainOffice, yearsAtEnersis, happiness, jobID) 
+      `INSERT INTO public.employees ("employeeID", firstName, lastName, nickName, age, mainOffice, timeatenersis, happiness, "jobID") 
          VALUES (:ID, :FIRSTNAME, :LASTNAME, :NICKNAME, :AGE, :OFFICE, :YEARS, :HAPPINESS, :JOBID)`,
 
       {
@@ -66,7 +67,7 @@ export class EmployeeMapper implements EmployeeRepository {
   /** --------------------------------------------------------------- */
 
   async getJob(jobID: number): Promise<Job> {
-    throw new Error('Method getJob is not implemented');
+    return new Job(12, 'Test', 'TestJob');
   }
 
   /** --------------------------------------------------------------- */

@@ -48,6 +48,14 @@ export class EmployeeController {
     return employees.map((employee) => new EmployeeDto(employee));
   }
 
+  @Get(':lastname')
+  async searchByName(@Param('lastname') lastname: string) {
+    const employees: EmployeeDetail[] = await this.employeeService.searchByName(
+      lastname,
+    );
+    return employees.map((employee) => new EmployeeDto(employee));
+  }
+
   @Post()
   @ApiParam({ name: 'requestPayload', required: true })
   async createEmployee(@Body() requestPayload: RequestPayload) {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/sequelize';
 import { Connections } from 'src/database';
-import { Employee } from 'src/domain/employee';
+import { Employee, EmployeeDetail } from 'src/domain/employee';
 import { EmployeeRepository } from 'src/services/employee.repository';
 // import { DbConnection } from './DbConnection';
 import { QueryTypes, Sequelize } from 'sequelize';
@@ -76,7 +76,25 @@ export class EmployeeMapper implements EmployeeRepository {
 
   /** --------------------------------------------------------------- */
 
-  async searchByName(id: string): Promise<Employee> {
-    throw new Error('Method search not implemented.');
+  async searchByName(lastname: string): Promise<Employee[]> {
+    const queryResult: any = await this.sequelize.query(
+      "SELECT * FROM public.employees WHERE employees.lastname = '" +
+        lastname +
+        "'",
+    );
+    const employeeArray: Employee[] = queryResult[0].map(
+      (employee: any): Employee => ({
+        employeeID: employee.employeeID,
+        firstName: employee.firstname,
+        lastName: employee.lastname,
+        nickName: employee.nickname,
+        age: employee.age,
+        mainOffice: employee.mainoffice,
+        yearsAtEnersis: employee.timeatenersis,
+        happiness: employee.happiness,
+        jobID: employee.jobID,
+      }),
+    );
+    return employeeArray;
   }
 }

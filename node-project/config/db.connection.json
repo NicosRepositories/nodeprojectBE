@@ -1,19 +1,27 @@
 {
   "common": {
-    "database": "test_db",
-    "username": "root",
-    "password": "root",
-    "host": "localhost",
+    "database": "learning_employees",
+
+    "username": "learning_employees",
+
+    "password": "{Y-&!pE<r$WD`(P2",
+
+    "host": "enersis-dev.cluster-c2hucmkce74c.eu-central-1.rds.amazonaws.com",
+
     "port": 5432,
+
     "dialect": "postgres",
+
     "dialectOptions": {
       "decimalNumbers": true
     }
   },
+
   "reader": {
-    "database": "test_db"
+    "database": "learning_employees"
   },
+
   "writer": {
-    "database": "test_db"
+    "database": "learning_employees"
   }
 }

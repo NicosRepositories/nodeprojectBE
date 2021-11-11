@@ -53,14 +53,25 @@ export class EmployeeService {
         ),
       );
     }
-
     return employeeDetails;
   }
 
   /** -------------------------------------------------- */
 
-  async searchByName(lastName: any): Promise<EmployeeDetail[]> {
-    throw new Error('Method not implemented.');
+  async searchByName(lastname: string): Promise<EmployeeDetail[]> {
+    const employees: Employee[] = await this.employeeRepository.searchByName(
+      lastname,
+    );
+    const employeeDetails: EmployeeDetail[] = [];
+    for (const employee of employees) {
+      employeeDetails.push(
+        new EmployeeDetail(
+          employee,
+          await this.employeeRepository.getJob(employee.jobID),
+        ),
+      );
+    }
+    return employeeDetails;
   }
 
   /** -------------------------------------------------- */

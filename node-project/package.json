@@ -38,6 +38,7 @@
     "sequelize-cli": "^6.3.0",
     "sequelize-typescript": "^2.1.1",
     "swagger-ui-express": "4.1.6",
+    "typemoq": "^2.1.0",
     "typeorm": "^0.2.38"
   },
   "devDependencies": {

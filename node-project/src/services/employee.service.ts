@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 import { EmployeeRepository } from 'src/services/employee.repository';
+import { JobRepository } from './job.repository';
 import { Employee, EmployeeDetail } from 'src/domain/employee';
 import { InjectConnection } from '@nestjs/sequelize';
 import { Connections } from 'src/database';
@@ -33,6 +34,8 @@ export class EmployeeService {
   constructor(
     @Inject('EmployeeRepository')
     private readonly employeeRepository: EmployeeRepository,
+    @Inject('JobRepository')
+    private readonly jobRepository: JobRepository,
     @InjectConnection(Connections.READER)
     private sequelize: Sequelize,
     @Inject('IEmployeeFactory')
@@ -49,7 +52,7 @@ export class EmployeeService {
       employeeDetails.push(
         new EmployeeDetail(
           employee,
-          await this.employeeRepository.getJob(employee.jobID),
+          new Job(55, 'empployeeservice', 'should be changed'),
         ),
       );
     }
@@ -67,7 +70,7 @@ export class EmployeeService {
       employeeDetails.push(
         new EmployeeDetail(
           employee,
-          await this.employeeRepository.getJob(employee.jobID),
+          new Job(55, 'empployeeservice', 'should be changed'),
         ),
       );
     }
@@ -121,8 +124,4 @@ export class EmployeeService {
   }
 
   /** ------------------------------------------------ */
-
-  async getJob(jobID: number): Promise<Job> {
-    return new Job(2, 'Praktikant IMS', 'Muss lernen.');
-  }
 }

@@ -64,12 +64,6 @@ export class EmployeeMapper implements EmployeeRepository {
 
   /** --------------------------------------------------------------- */
 
-  async getJob(jobID: number): Promise<Job> {
-    return new Job(12, 'Test', 'TestJob');
-  }
-
-  /** --------------------------------------------------------------- */
-
   async doesEmployeeExist() {
     return false;
   }
@@ -96,5 +90,21 @@ export class EmployeeMapper implements EmployeeRepository {
       }),
     );
     return employeeArray;
+  }
+
+  /** --------------------------------------------------------------- */
+
+  async getJob(jobID: number): Promise<Job[]> {
+    const queryResult: any = await this.sequelize.query(
+      "SELECT * FROM public.job WHERE job.jobid = '" + jobID + "'",
+    );
+    const jobArray: Job[] = queryResult[0].map(
+      (job: any): Job => ({
+        jobID: job.jobid,
+        jobName: job.jobName,
+        jobDescription: job.jobDescription,
+      }),
+    );
+    return jobArray;
   }
 }

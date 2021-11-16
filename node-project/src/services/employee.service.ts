@@ -65,14 +65,11 @@ export class EmployeeService {
     const employees: Employee[] = await this.employeeRepository.searchByName(
       lastname,
     );
+    const jobArray: any = await this.jobRepository.getJob(employees[0].jobID);
+    const job: Job = jobArray[0];
     const employeeDetails: EmployeeDetail[] = [];
     for (const employee of employees) {
-      employeeDetails.push(
-        new EmployeeDetail(
-          employee,
-          new Job(55, 'empployeeservice', 'should be changed'),
-        ),
-      );
+      employeeDetails.push(new EmployeeDetail(employee, job));
     }
     return employeeDetails;
   }

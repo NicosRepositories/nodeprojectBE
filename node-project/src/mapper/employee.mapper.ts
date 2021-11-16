@@ -96,7 +96,7 @@ export class EmployeeMapper implements EmployeeRepository {
 
   async getJob(jobID: number): Promise<Job[]> {
     const queryResult: any = await this.sequelize.query(
-      "SELECT * FROM public.job WHERE job.jobid = '" + jobID + "'",
+      'SELECT * FROM public.jobs WHERE jobs."jobId" = ' + jobID,
     );
     const jobArray: Job[] = queryResult[0].map(
       (job: any): Job => ({

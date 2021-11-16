@@ -100,11 +100,12 @@ export class EmployeeMapper implements EmployeeRepository {
     );
     const jobArray: Job[] = queryResult[0].map(
       (job: any): Job => ({
-        jobID: job.jobid,
-        jobName: job.jobName,
-        jobDescription: job.jobDescription,
+        jobID: job.jobId,
+        jobName: job.jobname,
+        jobDescription: job.description,
       }),
     );
+    console.log(jobArray);
     return jobArray;
   }
 }

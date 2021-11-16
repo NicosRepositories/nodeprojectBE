@@ -1,20 +1,28 @@
-import { Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
-import { get } from 'http';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiParam } from '@nestjs/swagger';
+import { IntegerDataType } from 'sequelize/types';
+import { Employee, EmployeeDetail } from 'src/domain/employee';
 import { Job } from 'src/domain/job';
+import { EmployeeService, RequestPayload } from 'src/services/employee.service';
 import { JobService } from '../services/job.service';
 
-/** This Controller contains a single endpoint which will return all Jobs that can be selected when creating an employee */
-@Controller('jobs')
-export class JobsController {
-  constructor(private jobService: JobService) {}
+@Controller('job')
+export class JobController {
+  constructor(private readonly jobService: JobService) {}
 
   @Get()
-  async getAllJobs(): Promise<Job[]> {
-    return await this.jobService.getAllJobs();
+  async getAllJobs() {
+    const jobArray: Job[] = await this.jobService.getAllJobs();
+    return jobArray.map(
+      (job) => new Job(job.jobID, job.jobName, job.jobDescription),
+    );
   }
 
-  @Get(':id')
-  async getJob(@Param('jobid') jobId: number): Promise<Job[]> {
-    return await this.jobService.getJob(jobId);
+  @Get(':jobid')
+  async searchByName(@Param('jobid') jobid: number) {
+    const jobs: Job[] = await this.jobService.getJob(jobid);
+    return jobs.map(
+      (job) => new Job(job.jobID, job.jobName, job.jobDescription),
+    );
   }
 }

@@ -4,7 +4,7 @@ import { HttpModule } from '@nestjs/axios';
 import { AppController } from 'src/app.controller';
 import { AppService } from 'src/app.service';
 import { EmployeeController } from 'src/controllers/employee.controller';
-import { JobsController } from 'src/controllers/job.controller';
+import { JobController } from 'src/controllers/job.controller';
 //import { AuthGateway } from "src/gateway/auth/auth.gateway";
 //import { KeycloakGateway } from "src/gateway/keycloak.gateway";
 import { EmployeeService } from 'src/services/employee.service';
@@ -25,7 +25,7 @@ import { EmployeeFactory } from './domain/employee.factory';
 
 @Module({
   imports: [HttpModule, SequelizeModule, DatabaseModule],
-  controllers: [AppController, EmployeeController, JobsController],
+  controllers: [AppController, EmployeeController, JobController],
   providers: [
     AppService,
     EmployeeService,

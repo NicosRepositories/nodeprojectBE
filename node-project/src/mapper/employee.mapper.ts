@@ -108,4 +108,20 @@ export class EmployeeMapper implements EmployeeRepository {
     console.log(jobArray);
     return jobArray;
   }
+
+  /** --------------------------------------------------------------- */
+
+  async getAllJobs(): Promise<Job[]> {
+    const queryResult: any = await this.sequelize.query(
+      'SELECT * FROM public.jobs',
+    );
+    const requestArray: Job[] = queryResult[0].map(
+      (job: any): Job => ({
+        jobID: job.jobId,
+        jobName: job.jobname,
+        jobDescription: job.descritpion,
+      }),
+    );
+    return requestArray;
+  }
 }

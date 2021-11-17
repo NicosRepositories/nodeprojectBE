@@ -43,9 +43,8 @@ export class EmployeeController {
 
   @Get()
   async getAllEmployees() {
-    const employees: EmployeeDetail[] =
-      await this.employeeService.getAllEmployees();
-    return employees.map((employee) => new EmployeeDto(employee));
+    const employees: Employee[] = await this.employeeService.getAllEmployees();
+    return employees;
   }
 
   @Get(':lastname')

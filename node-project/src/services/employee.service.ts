@@ -13,6 +13,8 @@ import { Connections } from 'src/database';
 import { QueryTypes, Sequelize } from 'sequelize';
 import { Job } from 'src/domain/job';
 import { IEmployeeFactory } from './../domain/iEmployeeFactory';
+import { Satisfaction } from 'src/domain/happiness';
+import satisfaction from 'database/models/satisfaction';
 
 dotenv.config();
 
@@ -43,20 +45,11 @@ export class EmployeeService {
   ) {}
 
   /** Get all Employees */
-  async getAllEmployees(): Promise<EmployeeDetail[]> {
+  async getAllEmployees(): Promise<Employee[]> {
     const employees: Employee[] =
       await this.employeeRepository.getAllEmployees();
-    const employeeDetails: EmployeeDetail[] = [];
 
-    for (const employee of employees) {
-      employeeDetails.push(
-        new EmployeeDetail(
-          employee,
-          new Job(55, 'empployeeservice', 'should be changed'),
-        ),
-      );
-    }
-    return employeeDetails;
+    return employees;
   }
 
   /** -------------------------------------------------- */
@@ -67,9 +60,13 @@ export class EmployeeService {
     );
     const jobArray: any = await this.jobRepository.getJob(employees[0].jobID);
     const job: Job = jobArray[0];
+    const satisfaction: Satisfaction = new Satisfaction(
+      10,
+      'should be changed',
+    );
     const employeeDetails: EmployeeDetail[] = [];
     for (const employee of employees) {
-      employeeDetails.push(new EmployeeDetail(employee, job));
+      employeeDetails.push(new EmployeeDetail(employee, job, satisfaction));
     }
     return employeeDetails;
   }

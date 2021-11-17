@@ -7,6 +7,7 @@ import {
 import * as dotenv from 'dotenv';
 import { EmployeeRepository } from 'src/services/employee.repository';
 import { JobRepository } from './job.repository';
+import { SatisfactionRepository } from './satisfaction.repository';
 import { Employee, EmployeeDetail } from 'src/domain/employee';
 import { InjectConnection } from '@nestjs/sequelize';
 import { Connections } from 'src/database';
@@ -15,6 +16,7 @@ import { Job } from 'src/domain/job';
 import { IEmployeeFactory } from './../domain/iEmployeeFactory';
 import { Satisfaction } from 'src/domain/happiness';
 import satisfaction from 'database/models/satisfaction';
+import { SatisfactionService } from './satisfaction.service';
 
 dotenv.config();
 
@@ -36,6 +38,8 @@ export class EmployeeService {
   constructor(
     @Inject('EmployeeRepository')
     private readonly employeeRepository: EmployeeRepository,
+    @Inject('SatisfactionRepository')
+    private readonly satisfactionRepository: SatisfactionRepository,
     @Inject('JobRepository')
     private readonly jobRepository: JobRepository,
     @InjectConnection(Connections.READER)
@@ -60,14 +64,15 @@ export class EmployeeService {
     );
     const jobArray: any = await this.jobRepository.getJob(employees[0].jobID);
     const job: Job = jobArray[0];
-    const satisfaction: Satisfaction = new Satisfaction(
-      10,
-      'should be changed',
-    );
+    const satisfactionArray: any =
+      await this.satisfactionRepository.getSatisfaction(employees[0].happiness);
+    const satisfaction: Satisfaction = satisfactionArray[0];
+
     const employeeDetails: EmployeeDetail[] = [];
     for (const employee of employees) {
       employeeDetails.push(new EmployeeDetail(employee, job, satisfaction));
     }
+    console.log(employeeDetails);
     return employeeDetails;
   }
 

@@ -20,6 +20,10 @@ export class EmployeeDto {
     name: string;
     descritpion: string;
   };
+  public satisfaction: {
+    happiness: number;
+    descritpion: string;
+  };
   constructor(employeeDetail: EmployeeDetail) {
     this.employeeID = employeeDetail.employee.employeeID;
     this.firstName = employeeDetail.employee.firstName;
@@ -34,6 +38,10 @@ export class EmployeeDto {
       jobId: employeeDetail.job.jobID,
       name: employeeDetail.job.jobName,
       descritpion: employeeDetail.job.jobDescription,
+    };
+    this.satisfaction = {
+      happiness: employeeDetail.satisfaction.happiness,
+      descritpion: employeeDetail.satisfaction.description,
     };
   }
 }

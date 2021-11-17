@@ -149,7 +149,14 @@ export class EmployeeMapper implements EmployeeRepository {
         `'`,
     );
 
-    return queryResult;
+    const satisfactionArray: Satisfaction[] = queryResult[0].map(
+      (satisfaction: any): Satisfaction => ({
+        happiness: satisfaction.happiness,
+        description: satisfaction.description,
+      }),
+    );
+    console.log(satisfactionArray);
+    return satisfactionArray;
   }
 
   /** --------------------------------------------------------------- */

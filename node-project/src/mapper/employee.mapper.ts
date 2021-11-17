@@ -154,15 +154,11 @@ export class EmployeeMapper implements EmployeeRepository {
 
   /** --------------------------------------------------------------- */
 
-  /**async getAllOptions(parameters: Array<any>): Promise<number> {
-    await this.sequelize.query(
-      `UPDATE public.employees SET happiness = ` +
-        parameters[1] +
-        ` WHERE lastname = '` +
-        parameters[0] +
-        `'`,
+  async getAllOptions(): Promise<Satisfaction[]> {
+    const queryResult: any = await this.sequelize.query(
+      `SELECT * FROM public.satisfactions`,
     );
 
-    return parameters[1];
-  }*/
+    return queryResult[0];
+  }
 }

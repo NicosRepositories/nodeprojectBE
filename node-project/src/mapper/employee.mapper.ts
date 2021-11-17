@@ -7,6 +7,7 @@ import { EmployeeRepository } from 'src/services/employee.repository';
 import { QueryTypes, Sequelize } from 'sequelize';
 import { Job } from 'src/domain/job';
 import { emitWarning } from 'process';
+import { Satisfaction } from 'src/domain/happiness';
 
 @Injectable()
 export class EmployeeMapper implements EmployeeRepository {
@@ -138,4 +139,30 @@ export class EmployeeMapper implements EmployeeRepository {
 
     return parameters[1];
   }
+
+  /** --------------------------------------------------------------- */
+
+  async getSatisfaction(happiness: number): Promise<Satisfaction[]> {
+    const queryResult: any = await this.sequelize.query(
+      `SELECT * FROM public.satisfactions WHERE happiness = '` +
+        happiness +
+        `'`,
+    );
+
+    return queryResult;
+  }
+
+  /** --------------------------------------------------------------- */
+
+  /**async getAllOptions(parameters: Array<any>): Promise<number> {
+    await this.sequelize.query(
+      `UPDATE public.employees SET happiness = ` +
+        parameters[1] +
+        ` WHERE lastname = '` +
+        parameters[0] +
+        `'`,
+    );
+
+    return parameters[1];
+  }*/
 }

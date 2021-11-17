@@ -22,14 +22,22 @@ import { DatabaseModule } from './database/database.module';
 //import { DbNames } from "./mapper/DbNames";
 import { Sequelize } from 'sequelize';
 import { EmployeeFactory } from './domain/employee.factory';
+import { SatisfactionController } from './controllers/satisfaction.controller';
+import { SatisfactionService } from './services/satisfaction.service';
 
 @Module({
   imports: [HttpModule, SequelizeModule, DatabaseModule],
-  controllers: [AppController, EmployeeController, JobController],
+  controllers: [
+    AppController,
+    EmployeeController,
+    JobController,
+    SatisfactionController,
+  ],
   providers: [
     AppService,
     EmployeeService,
     JobService,
+    SatisfactionService,
     {
       provide: 'EmployeeRepository',
       useClass: EmployeeMapper,
@@ -40,6 +48,10 @@ import { EmployeeFactory } from './domain/employee.factory';
     },
     {
       provide: 'JobRepository',
+      useClass: EmployeeMapper,
+    },
+    {
+      provide: 'SatisfactionRepository',
       useClass: EmployeeMapper,
     },
   ],

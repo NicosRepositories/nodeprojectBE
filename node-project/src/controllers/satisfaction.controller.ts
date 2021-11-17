@@ -5,17 +5,20 @@ import { Employee, EmployeeDetail } from 'src/domain/employee';
 import { Satisfaction } from 'src/domain/happiness';
 import { Job } from 'src/domain/job';
 import { EmployeeService, RequestPayload } from 'src/services/employee.service';
+import { SatisfactionService } from 'src/services/satisfaction.service';
 import { JobService } from '../services/job.service';
 
-/** @Controller('satisfaction')
+@Controller('satisfaction')
 export class SatisfactionController {
   constructor(private readonly satisfactionService: SatisfactionService) {}
 
   @Get()
   async getAllOptions() {
-    const satisfactionArray: Satisfaction[] = await this.satisfactionService.getAllOptions();
+    const satisfactionArray: Satisfaction[] =
+      await this.satisfactionService.getAllOptions();
     return satisfactionArray.map(
-      (satisfaction) => new Satisfaction(satisfaction.happiness, satisfaction.description),
+      (satisfaction) =>
+        new Satisfaction(satisfaction.happiness, satisfaction.description),
     );
   }
 
@@ -23,10 +26,6 @@ export class SatisfactionController {
   async getSatisfaction(@Param('happiness') happiness: number) {
     const satisfactions: Satisfaction[] =
       await this.satisfactionService.getSatisfaction(happiness);
-    return satisfactions.map(
-      (satisfaction) =>
-        new Satisfaction(satisfaction.happiness, satisfaction.description),
-    );
+    return satisfactions[0];
   }
 }
-*/

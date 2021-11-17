@@ -12,4 +12,5 @@ export interface EmployeeRepository {
     username: string;
   }): Promise<boolean>;*/
   createEmployee(employee: Employee): any;
+  changeSatisfaction(parameters: Array<any>): Promise<number>;
 }

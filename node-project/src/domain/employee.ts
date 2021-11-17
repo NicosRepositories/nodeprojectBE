@@ -1,3 +1,4 @@
+import { Satisfaction } from './happiness';
 import { Job } from './job';
 
 export interface Employee {
@@ -11,7 +12,11 @@ export interface Employee {
   happiness: number;
   jobID: number;
 }
-/** This class combines the information of the employee itself with the more detailed infos about the Job */
+/** This class combines the information of the employee itself with the more detailed infos about the Job and happiness */
 export class EmployeeDetail {
-  constructor(public employee: Employee, public job: Job) {}
+  constructor(
+    public employee: Employee,
+    public job: Job,
+    public satisfaction: Satisfaction,
+  ) {}
 }

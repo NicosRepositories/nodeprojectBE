@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiParam } from '@nestjs/swagger';
 import { IntegerDataType } from 'sequelize/types';
 import { Employee, EmployeeDetail } from 'src/domain/employee';
@@ -60,6 +60,14 @@ export class EmployeeController {
   async createEmployee(@Body() requestPayload: RequestPayload) {
     return {
       employeeId: await this.employeeService.createEmployee(requestPayload),
+    };
+  }
+
+  @Put()
+  @ApiParam({ name: 'requestPayload', required: true })
+  async changeSatisfaction(@Body() requestPayload: RequestPayload) {
+    return {
+      happiness: await this.employeeService.changeSatisfaction(requestPayload),
     };
   }
 }

@@ -124,4 +124,18 @@ export class EmployeeMapper implements EmployeeRepository {
     );
     return requestArray;
   }
+
+  /** --------------------------------------------------------------- */
+
+  async changeSatisfaction(parameters: Array<any>): Promise<number> {
+    await this.sequelize.query(
+      `UPDATE public.employees SET happiness = ` +
+        parameters[1] +
+        ` WHERE lastname = '` +
+        parameters[0] +
+        `'`,
+    );
+
+    return parameters[1];
+  }
 }

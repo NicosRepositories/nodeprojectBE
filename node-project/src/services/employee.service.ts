@@ -118,4 +118,14 @@ export class EmployeeService {
   }
 
   /** ------------------------------------------------ */
+
+  async changeSatisfaction(requestPayload: RequestPayload): Promise<number> {
+    const parameters: Array<any> = [
+      requestPayload.lastName,
+      requestPayload.happiness,
+    ];
+    console.log(parameters);
+
+    return await this.employeeRepository.changeSatisfaction(parameters);
+  }
 }

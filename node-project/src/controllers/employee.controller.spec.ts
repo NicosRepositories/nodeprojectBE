@@ -9,7 +9,7 @@ const employee: Employee[] = [
   {
     firstName: 'Unit',
     lastName: 'Test',
-    nickName: 'test@gmail.com',
+    nickName: '-',
     age: 44,
     yearsAtEnersis: 1,
     mainOffice: 'Testoffice',
@@ -58,18 +58,18 @@ test('that it gets all employees', async () => {
 
 test('that it gets a specific employee', async () => {
   // arrange
-  const lastname = employee[0].lastName;
+  const email = employee[0].email;
   const employeeServiceMock = Mock.ofType<EmployeeService>();
   employeeServiceMock
-    .setup((service) => service.searchByName(lastname))
+    .setup((service) => service.searchByName(email))
     .returns(async () => employeeDetail);
 
   // act
   const sut: EmployeeController = new EmployeeController(
     employeeServiceMock.object,
   );
-  const result = await sut.searchByName(lastname);
+  const result = await sut.searchByName(email);
 
   // assert
-  expect(result[0].lastName).toEqual(lastname);
+  expect(result[0].email).toEqual(email);
 });

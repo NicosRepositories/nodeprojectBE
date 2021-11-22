@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Job } from 'src/domain/job';
+import { Job } from '../domain/job';
 import { JobRepository } from '../services/job.repository';
 
 /** Service to get all Jobs */

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Satisfaction } from 'src/domain/happiness';
+import { Satisfaction } from '../domain/happiness';
 import { SatisfactionRepository } from './satisfaction.repository';
 
 /** Service to get all Jobs */

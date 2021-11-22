@@ -1,4 +1,4 @@
-import { Job } from 'src/domain/job';
+import { Job } from '../domain/job';
 
 export interface JobRepository {
   getJob(jobID: number): Promise<Job[]>;

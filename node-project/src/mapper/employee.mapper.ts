@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/sequelize';
-import { Connections } from 'src/database';
-import { Employee, EmployeeDetail } from 'src/domain/employee';
-import { EmployeeRepository } from 'src/services/employee.repository';
+import { Connections } from '../database';
+import { Employee, EmployeeDetail } from '../domain/employee';
+import { EmployeeRepository } from '../services/employee.repository';
 // import { DbConnection } from './DbConnection';
 import { QueryTypes, Sequelize } from 'sequelize';
-import { Job } from 'src/domain/job';
+import { Job } from '../domain/job';
 import { emitWarning } from 'process';
-import { Satisfaction } from 'src/domain/happiness';
+import { Satisfaction } from '../domain/happiness';
 
 @Injectable()
 export class EmployeeMapper implements EmployeeRepository {

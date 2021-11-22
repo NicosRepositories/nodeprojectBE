@@ -1,5 +1,5 @@
-import { Employee, EmployeeDetail } from 'src/domain/employee';
-import { Job } from 'src/domain/job';
+import { Employee, EmployeeDetail } from '../domain/employee';
+import { Job } from '../domain/job';
 import { RequestPayload } from './employee.service';
 
 export interface EmployeeRepository {

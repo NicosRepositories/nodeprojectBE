@@ -5,18 +5,16 @@ import {
   Injectable,
 } from '@nestjs/common';
 import * as dotenv from 'dotenv';
-import { EmployeeRepository } from 'src/services/employee.repository';
+import { EmployeeRepository } from '../services/employee.repository';
 import { JobRepository } from './job.repository';
 import { SatisfactionRepository } from './satisfaction.repository';
-import { Employee, EmployeeDetail } from 'src/domain/employee';
+import { Employee, EmployeeDetail } from '../domain/employee';
 import { InjectConnection } from '@nestjs/sequelize';
-import { Connections } from 'src/database';
+import { Connections } from '../database';
 import { QueryTypes, Sequelize } from 'sequelize';
-import { Job } from 'src/domain/job';
+import { Job } from '../domain/job';
 import { IEmployeeFactory } from './../domain/iEmployeeFactory';
-import { Satisfaction } from 'src/domain/happiness';
-import satisfaction from 'database/models/satisfaction';
-import { SatisfactionService } from './satisfaction.service';
+import { Satisfaction } from '../domain/happiness';
 
 dotenv.config();
 

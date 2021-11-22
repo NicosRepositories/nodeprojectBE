@@ -1,8 +1,7 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Put } from '@nestjs/common';
 import { ApiParam } from '@nestjs/swagger';
-import { IntegerDataType } from 'sequelize/types';
-import { Employee, EmployeeDetail } from 'src/domain/employee';
-import { EmployeeService, RequestPayload } from 'src/services/employee.service';
+import { EmployeeDetail, Employee } from '../domain/employee';
+import { EmployeeService, RequestPayload } from '../services/employee.service';
 
 /** The object which is used in the controller and FE for getting info of Employees */
 export class EmployeeDto {

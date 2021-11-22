@@ -1,5 +1,5 @@
 /**import { Sequelize } from 'sequelize';
-import { Employee, EmployeeDetail } from 'src/domain/employee';
+import { Employee, EmployeeDetail } from '../domain/employee';
 import { EmployeeMapper } from './employee.mapper';
 
 test('that all employees can be fetched', async () => {

@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiParam } from '@nestjs/swagger';
 import { IntegerDataType } from 'sequelize/types';
-import { Employee, EmployeeDetail } from 'src/domain/employee';
-import { Job } from 'src/domain/job';
-import { EmployeeService, RequestPayload } from 'src/services/employee.service';
+import { Employee, EmployeeDetail } from '../domain/employee';
+import { Job } from '../domain/job';
+import { EmployeeService, RequestPayload } from '../services/employee.service';
 import { JobService } from '../services/job.service';
 
 @Controller('job')

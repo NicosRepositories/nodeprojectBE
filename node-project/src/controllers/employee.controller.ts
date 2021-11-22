@@ -83,9 +83,16 @@ export class EmployeeController {
   @Post()
   @ApiParam({ name: 'requestPayload', required: true })
   async createEmployee(@Body() requestPayload: RequestPayload) {
-    return {
-      employeeId: await this.employeeService.createEmployee(requestPayload),
-    };
+    const result = await this.employeeService.createEmployee(requestPayload);
+    if (result == 0) {
+      return {
+        status: 'Employee with this email already exists.',
+      };
+    } else {
+      return {
+        status: 'Employee was created',
+      };
+    }
   }
 
   @Put()

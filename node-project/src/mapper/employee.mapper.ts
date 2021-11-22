@@ -41,9 +41,9 @@ export class EmployeeMapper implements EmployeeRepository {
   /** --------------------------------------------------------------- */
 
   async createEmployee(employee: Employee) {
-    const queryResult = await this.sequelize.query(
+    const result = await this.sequelize.query(
       `INSERT INTO public.employees (firstname, lastname, nickname, age, mainoffice, timeatenersis, happiness, "jobID", email) 
-         VALUES (:FIRSTNAME, :LASTNAME, :NICKNAME, :AGE, :OFFICE, :YEARS, :HAPPINESS, :JOBID, :EMAIL)`,
+         VALUES (:FIRSTNAME, :LASTNAME, :NICKNAME, :AGE, :OFFICE, :YEARS, :HAPPINESS, :JOBID, :EMAIL) ON CONFLICT DO NOTHING`,
 
       {
         replacements: {
@@ -60,13 +60,7 @@ export class EmployeeMapper implements EmployeeRepository {
       },
     );
 
-    return queryResult[0];
-  }
-
-  /** --------------------------------------------------------------- */
-
-  async doesEmployeeExist() {
-    return false;
+    return result[1];
   }
 
   /** --------------------------------------------------------------- */

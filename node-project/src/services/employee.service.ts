@@ -78,12 +78,8 @@ export class EmployeeService {
 
   /** -------------------------------------------------- */
 
-  async createEmployee(requestPayload: RequestPayload): Promise<string> {
+  async createEmployee(requestPayload: RequestPayload): Promise<number> {
     this.checkParameters(requestPayload);
-
-    if (await this.employeeRepository.doesEmployeeExist()) {
-      throw new ConflictException('this Employee already exists');
-    }
 
     const employee: Employee = this.employeeFactory.create(
       requestPayload.firstName,
@@ -97,8 +93,8 @@ export class EmployeeService {
       requestPayload.email,
     );
 
-    const employeeId = await this.employeeRepository.createEmployee(employee);
-    return employeeId;
+    const result = await this.employeeRepository.createEmployee(employee);
+    return result;
   }
 
   private checkParameters(requestPayload: RequestPayload): boolean {

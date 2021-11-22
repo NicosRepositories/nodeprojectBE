@@ -1,4 +1,14 @@
-import { Controller, Get, Param, Post, Body, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Put,
+  NotFoundException,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { ApiParam } from '@nestjs/swagger';
 import { EmployeeDetail, Employee } from '../domain/employee';
 import { EmployeeService, RequestPayload } from '../services/employee.service';
@@ -56,9 +66,17 @@ export class EmployeeController {
 
   @Get(':email')
   async searchByName(@Param('email') email: string) {
-    const employees: EmployeeDetail[] = await this.employeeService.searchByName(
-      email,
-    );
+    const employees: EmployeeDetail[] | undefined =
+      await this.employeeService.searchByName(email);
+    if (employees.length == 0) {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          error: 'Employee with this email does not exist',
+        },
+        HttpStatus.NOT_FOUND,
+      );
+    }
     return employees.map((employee) => new EmployeeDto(employee));
   }
 

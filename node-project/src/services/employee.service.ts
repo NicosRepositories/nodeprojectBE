@@ -56,10 +56,13 @@ export class EmployeeService {
 
   /** -------------------------------------------------- */
 
-  async searchByName(lastname: string): Promise<EmployeeDetail[]> {
+  async searchByName(email: string): Promise<EmployeeDetail[]> {
     const employees: Employee[] = await this.employeeRepository.searchByName(
-      lastname,
+      email,
     );
+    if (employees.length == 0) {
+      return [];
+    }
     const jobArray: any = await this.jobRepository.getJob(employees[0].jobID);
     const job: Job = jobArray[0];
     const satisfactionArray: any =

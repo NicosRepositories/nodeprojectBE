@@ -68,8 +68,9 @@ test('that it gets a specific employee', async () => {
   const sut: EmployeeController = new EmployeeController(
     employeeServiceMock.object,
   );
-  const result = await sut.searchByName(email);
+  const result: any = await sut.searchByName(email);
 
   // assert
+
   expect(result[0].email).toEqual(email);
 });

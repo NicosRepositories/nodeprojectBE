@@ -19,7 +19,6 @@ import { Satisfaction } from '../domain/happiness';
 dotenv.config();
 
 export interface RequestPayload {
-  employeeID: number;
   firstName: string;
   lastName: string;
   nickName: string;
@@ -28,6 +27,7 @@ export interface RequestPayload {
   yearsAtEnersis: number;
   happiness: number;
   jobID: number;
+  email: string;
 }
 
 /** Service that handles the Employees */
@@ -83,7 +83,6 @@ export class EmployeeService {
     }
 
     const employee: Employee = this.employeeFactory.create(
-      requestPayload.employeeID,
       requestPayload.firstName,
       requestPayload.lastName,
       requestPayload.nickName,
@@ -92,6 +91,7 @@ export class EmployeeService {
       requestPayload.yearsAtEnersis,
       requestPayload.happiness,
       requestPayload.jobID,
+      requestPayload.email,
     );
 
     const employeeId = await this.employeeRepository.createEmployee(employee);
@@ -100,7 +100,6 @@ export class EmployeeService {
 
   private checkParameters(requestPayload: RequestPayload): boolean {
     const hasAllParameters =
-      !!requestPayload.employeeID &&
       !!requestPayload.firstName &&
       !!requestPayload.lastName &&
       !!requestPayload.nickName &&
@@ -109,6 +108,7 @@ export class EmployeeService {
       !!requestPayload.yearsAtEnersis &&
       !!requestPayload.happiness &&
       !!requestPayload.jobID;
+    !!requestPayload.email;
 
     if (!hasAllParameters) {
       throw new BadRequestException(

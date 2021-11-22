@@ -4,7 +4,7 @@ import { RequestPayload } from './employee.service';
 
 export interface EmployeeRepository {
   doesEmployeeExist(): Promise<boolean>;
-  searchByName(lastname: string): Promise<Employee[]>;
+  searchByName(email: string): Promise<Employee[]>;
   getAllEmployees(): Promise<Employee[]>;
   //following function gets Implemented if there is enough time for it.
   /**doesEmployeeExist(employeeDetails: {

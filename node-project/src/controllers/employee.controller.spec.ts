@@ -7,7 +7,6 @@ import satisfaction from 'database/models/satisfaction';
 
 const employee: Employee[] = [
   {
-    employeeID: 7788,
     firstName: 'Unit',
     lastName: 'Test',
     nickName: 'test@gmail.com',
@@ -16,6 +15,7 @@ const employee: Employee[] = [
     mainOffice: 'Testoffice',
     happiness: 1,
     jobID: 93,
+    email: 'test@mail.com',
   },
 ];
 

@@ -5,7 +5,6 @@ import { EmployeeService, RequestPayload } from '../services/employee.service';
 
 /** The object which is used in the controller and FE for getting info of Employees */
 export class EmployeeDto {
-  public employeeID: number;
   public firstName: string;
   public lastName: string;
   public nickName: string;
@@ -14,6 +13,7 @@ export class EmployeeDto {
   public timeAtEnersis: number;
   public happiness: number;
   public jobID: number;
+  public email: string;
   public job: {
     jobId: number;
     name: string;
@@ -24,7 +24,6 @@ export class EmployeeDto {
     descritpion: string;
   };
   constructor(employeeDetail: EmployeeDetail) {
-    this.employeeID = employeeDetail.employee.employeeID;
     this.firstName = employeeDetail.employee.firstName;
     this.lastName = employeeDetail.employee.lastName;
     this.nickName = employeeDetail.employee.nickName;
@@ -33,6 +32,7 @@ export class EmployeeDto {
     this.timeAtEnersis = employeeDetail.employee.yearsAtEnersis;
     this.happiness = employeeDetail.employee.happiness;
     this.jobID = employeeDetail.employee.jobID;
+    this.email = employeeDetail.employee.email;
     this.job = {
       jobId: employeeDetail.job.jobID,
       name: employeeDetail.job.jobName,
@@ -54,10 +54,10 @@ export class EmployeeController {
     return employees;
   }
 
-  @Get(':lastname')
-  async searchByName(@Param('lastname') lastname: string) {
+  @Get(':email')
+  async searchByName(@Param('email') email: string) {
     const employees: EmployeeDetail[] = await this.employeeService.searchByName(
-      lastname,
+      email,
     );
     return employees.map((employee) => new EmployeeDto(employee));
   }

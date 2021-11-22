@@ -24,7 +24,6 @@ export class EmployeeMapper implements EmployeeRepository {
     );
     const requestArray: Employee[] = queryResult[0].map(
       (employee: any): Employee => ({
-        employeeID: employee.employeeID,
         firstName: employee.firstname,
         lastName: employee.lastname,
         nickName: employee.nickname,
@@ -33,6 +32,7 @@ export class EmployeeMapper implements EmployeeRepository {
         yearsAtEnersis: employee.timeatenersis,
         happiness: employee.happiness,
         jobID: employee.jobID,
+        email: employee.email,
       }),
     );
     return requestArray;
@@ -42,12 +42,11 @@ export class EmployeeMapper implements EmployeeRepository {
 
   async createEmployee(employee: Employee) {
     const queryResult = await this.sequelize.query(
-      `INSERT INTO public.employees ("employeeID", firstname, lastname, nickname, age, mainoffice, timeatenersis, happiness, "jobID") 
-         VALUES (:ID, :FIRSTNAME, :LASTNAME, :NICKNAME, :AGE, :OFFICE, :YEARS, :HAPPINESS, :JOBID)`,
+      `INSERT INTO public.employees (firstname, lastname, nickname, age, mainoffice, timeatenersis, happiness, "jobID", email) 
+         VALUES (:FIRSTNAME, :LASTNAME, :NICKNAME, :AGE, :OFFICE, :YEARS, :HAPPINESS, :JOBID, :EMAIL)`,
 
       {
         replacements: {
-          ID: employee.employeeID,
           FIRSTNAME: employee.firstName,
           LASTNAME: employee.lastName,
           NICKNAME: employee.nickName,
@@ -56,6 +55,7 @@ export class EmployeeMapper implements EmployeeRepository {
           YEARS: employee.yearsAtEnersis,
           HAPPINESS: employee.happiness,
           JOBID: employee.jobID,
+          EMAIL: employee.email,
         },
       },
     );
@@ -71,15 +71,12 @@ export class EmployeeMapper implements EmployeeRepository {
 
   /** --------------------------------------------------------------- */
 
-  async searchByName(lastname: string): Promise<Employee[]> {
+  async searchByName(email: string): Promise<Employee[]> {
     const queryResult: any = await this.sequelize.query(
-      "SELECT * FROM public.employees WHERE employees.lastname = '" +
-        lastname +
-        "';",
+      "SELECT * FROM public.employees WHERE employees.email = '" + email + "';",
     );
     const employeeArray: Employee[] = queryResult[0].map(
       (employee: any): Employee => ({
-        employeeID: employee.employeeID,
         firstName: employee.firstname,
         lastName: employee.lastname,
         nickName: employee.nickname,
@@ -88,6 +85,7 @@ export class EmployeeMapper implements EmployeeRepository {
         yearsAtEnersis: employee.timeatenersis,
         happiness: employee.happiness,
         jobID: employee.jobID,
+        email: employee.email,
       }),
     );
     return employeeArray;

@@ -5,7 +5,6 @@ import { IEmployeeFactory } from './iEmployeeFactory';
 /** This factory knows how to create a new Employee object with the provided parameters */
 export class EmployeeFactory implements IEmployeeFactory {
   create(
-    employeeID: number,
     firstName: string,
     lastName: string,
     nickName: string,
@@ -14,9 +13,9 @@ export class EmployeeFactory implements IEmployeeFactory {
     yearsAtEnersis: number,
     happiness: number,
     jobID: number,
+    email: string,
   ): Employee {
     const employee: Employee = {
-      employeeID,
       firstName,
       lastName,
       nickName,
@@ -25,6 +24,7 @@ export class EmployeeFactory implements IEmployeeFactory {
       yearsAtEnersis,
       happiness,
       jobID,
+      email,
     };
     return employee;
   }

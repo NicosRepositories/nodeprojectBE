@@ -2,7 +2,6 @@ import { Satisfaction } from './happiness';
 import { Job } from './job';
 
 export interface Employee {
-  employeeID: number;
   firstName: string;
   lastName: string;
   nickName: string;
@@ -11,6 +10,7 @@ export interface Employee {
   yearsAtEnersis: number;
   happiness: number;
   jobID: number;
+  email: string;
 }
 /** This class combines the information of the employee itself with the more detailed infos about the Job and happiness */
 export class EmployeeDetail {

@@ -2,7 +2,6 @@ import { Employee } from './employee';
 
 export interface IEmployeeFactory {
   create(
-    employeeID: number,
     firstName: string,
     lastName: string,
     nickName: string,
@@ -11,5 +10,6 @@ export interface IEmployeeFactory {
     yearsAtEnersis: number,
     happiness: number,
     jobID: number,
+    email: string,
   ): Employee;
 }

@@ -75,7 +75,7 @@ export class EmployeeMapper implements EmployeeRepository {
     const queryResult: any = await this.sequelize.query(
       "SELECT * FROM public.employees WHERE employees.lastname = '" +
         lastname +
-        "'",
+        "';",
     );
     const employeeArray: Employee[] = queryResult[0].map(
       (employee: any): Employee => ({
@@ -106,7 +106,6 @@ export class EmployeeMapper implements EmployeeRepository {
         jobDescription: job.description,
       }),
     );
-    console.log(jobArray);
     return jobArray;
   }
 
@@ -155,7 +154,6 @@ export class EmployeeMapper implements EmployeeRepository {
         description: satisfaction.description,
       }),
     );
-    console.log(satisfactionArray);
     return satisfactionArray;
   }
 

@@ -72,7 +72,6 @@ export class EmployeeService {
     for (const employee of employees) {
       employeeDetails.push(new EmployeeDetail(employee, job, satisfaction));
     }
-    console.log(employeeDetails);
     return employeeDetails;
   }
 
@@ -129,8 +128,6 @@ export class EmployeeService {
       requestPayload.lastName,
       requestPayload.happiness,
     ];
-    console.log(parameters);
-
     return await this.employeeRepository.changeSatisfaction(parameters);
   }
 }

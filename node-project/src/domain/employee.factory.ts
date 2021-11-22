@@ -15,8 +15,7 @@ export class EmployeeFactory implements IEmployeeFactory {
     happiness: number,
     jobID: number,
   ): Employee {
-    const id = v4();
-    const accountRequest: Employee = {
+    const employee: Employee = {
       employeeID,
       firstName,
       lastName,
@@ -27,6 +26,6 @@ export class EmployeeFactory implements IEmployeeFactory {
       happiness,
       jobID,
     };
-    return accountRequest;
+    return employee;
   }
 }

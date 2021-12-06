@@ -33,6 +33,7 @@ export class EmployeeMapper implements EmployeeRepository {
         happiness: employee.happiness,
         jobID: employee.jobID,
         email: employee.email,
+        managerID: employee.managerID,
       }),
     );
     return requestArray;
@@ -42,8 +43,8 @@ export class EmployeeMapper implements EmployeeRepository {
 
   async createEmployee(employee: Employee) {
     const result = await this.sequelize.query(
-      `INSERT INTO public.employees (firstname, lastname, nickname, age, mainoffice, timeatenersis, happiness, "jobID", email) 
-         VALUES (:FIRSTNAME, :LASTNAME, :NICKNAME, :AGE, :OFFICE, :YEARS, :HAPPINESS, :JOBID, :EMAIL) ON CONFLICT DO NOTHING`,
+      `INSERT INTO public.employees (firstname, lastname, nickname, age, mainoffice, timeatenersis, happiness, "jobID", email, "managerID") 
+         VALUES (:FIRSTNAME, :LASTNAME, :NICKNAME, :AGE, :OFFICE, :YEARS, :HAPPINESS, :JOBID, :EMAIL, :MANAGER) ON CONFLICT DO NOTHING`,
 
       {
         replacements: {
@@ -56,6 +57,7 @@ export class EmployeeMapper implements EmployeeRepository {
           HAPPINESS: employee.happiness,
           JOBID: employee.jobID,
           EMAIL: employee.email,
+          MANAGER: employee.managerID,
         },
       },
     );
@@ -80,6 +82,7 @@ export class EmployeeMapper implements EmployeeRepository {
         happiness: employee.happiness,
         jobID: employee.jobID,
         email: employee.email,
+        managerID: employee.managerID,
       }),
     );
     return employeeArray;

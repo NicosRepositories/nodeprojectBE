@@ -16,6 +16,7 @@ const employee: Employee[] = [
     happiness: 1,
     jobID: 93,
     email: 'test@mail.com',
+    managerID: 2,
   },
 ];
 

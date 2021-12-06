@@ -32,6 +32,10 @@ module.exports = {
       jobID: {
         type: Sequelize.INTEGER,
       },
+      managerID: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -28,6 +28,7 @@ export interface RequestPayload {
   happiness: number;
   jobID: number;
   email: string;
+  managerID: number;
 }
 
 /** Service that handles the Employees */
@@ -91,6 +92,7 @@ export class EmployeeService {
       requestPayload.happiness,
       requestPayload.jobID,
       requestPayload.email,
+      requestPayload.managerID,
     );
 
     const result = await this.employeeRepository.createEmployee(employee);

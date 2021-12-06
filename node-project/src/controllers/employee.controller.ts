@@ -24,6 +24,7 @@ export class EmployeeDto {
   public happiness: number;
   public jobID: number;
   public email: string;
+  public managerID: number;
   public job: {
     jobId: number;
     name: string;
@@ -43,6 +44,7 @@ export class EmployeeDto {
     this.happiness = employeeDetail.employee.happiness;
     this.jobID = employeeDetail.employee.jobID;
     this.email = employeeDetail.employee.email;
+    this.managerID = employeeDetail.employee.managerID;
     this.job = {
       jobId: employeeDetail.job.jobID,
       name: employeeDetail.job.jobName,

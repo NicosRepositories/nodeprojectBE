@@ -12,6 +12,7 @@ export interface Employee {
   jobID: number;
   email: string;
   managerID: number;
+  homeOffice: string;
 }
 /** This class combines the information of the employee itself with the more detailed infos about the Job and happiness */
 export class EmployeeDetail {

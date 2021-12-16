@@ -25,6 +25,7 @@ export class EmployeeDto {
   public jobID: number;
   public email: string;
   public managerID: number;
+  public homeOffice: string;
   public job: {
     jobId: number;
     name: string;
@@ -45,6 +46,7 @@ export class EmployeeDto {
     this.jobID = employeeDetail.employee.jobID;
     this.email = employeeDetail.employee.email;
     this.managerID = employeeDetail.employee.managerID;
+    this.homeOffice = employeeDetail.employee.homeOffice;
     this.job = {
       jobId: employeeDetail.job.jobID,
       name: employeeDetail.job.jobName,
@@ -103,5 +105,21 @@ export class EmployeeController {
     return {
       happiness: await this.employeeService.changeSatisfaction(requestPayload),
     };
+  }
+
+  @Get(':canton')
+  async searchByCanton(@Param('canton') canton: string) {
+    const names: String[] | undefined =
+      await this.employeeService.searchByCanton(canton);
+    if (names.length == 0) {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          error: 'Employee living in ' + canton + ' does not exist',
+        },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return names;
   }
 }

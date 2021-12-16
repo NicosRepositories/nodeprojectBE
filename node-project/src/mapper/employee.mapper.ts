@@ -34,6 +34,7 @@ export class EmployeeMapper implements EmployeeRepository {
         jobID: employee.jobID,
         email: employee.email,
         managerID: employee.managerID,
+        homeOffice: employee.homeOffice,
       }),
     );
     return requestArray;
@@ -83,6 +84,7 @@ export class EmployeeMapper implements EmployeeRepository {
         jobID: employee.jobID,
         email: employee.email,
         managerID: employee.managerID,
+        homeOffice: employee.homeOffice,
       }),
     );
     return employeeArray;
@@ -160,5 +162,26 @@ export class EmployeeMapper implements EmployeeRepository {
     );
 
     return queryResult[0];
+  }
+
+  /** --------------------------------------------------------------- */
+
+  async searchByCanton(canton: string): Promise<String[]> {
+    const municipalities: any = await this.sequelize.query(
+      "SELECT name_3 FROM public.gadm36_che_3 WHERE gadm36_che_3.name_1 = '" +
+        canton +
+        "';",
+    );
+
+    const queryResult: any = [];
+    municipalities.forEach(async (municipality: string) => {
+      await this.sequelize.query(
+        "SELECT firstname, lastname FROM public.employees WHERE employees.homeoffice = '" +
+          municipality +
+          "';",
+      );
+    });
+
+    return queryResult;
   }
 }

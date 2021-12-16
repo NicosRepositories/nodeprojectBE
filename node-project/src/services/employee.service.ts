@@ -29,6 +29,7 @@ export interface RequestPayload {
   jobID: number;
   email: string;
   managerID: number;
+  homeOffice: string;
 }
 
 /** Service that handles the Employees */
@@ -93,6 +94,7 @@ export class EmployeeService {
       requestPayload.jobID,
       requestPayload.email,
       requestPayload.managerID,
+      requestPayload.homeOffice,
     );
 
     const result = await this.employeeRepository.createEmployee(employee);
@@ -108,8 +110,9 @@ export class EmployeeService {
       !!requestPayload.mainOffice &&
       !!requestPayload.yearsAtEnersis &&
       !!requestPayload.happiness &&
-      !!requestPayload.jobID;
-    !!requestPayload.email;
+      !!requestPayload.jobID &&
+      !!requestPayload.email &&
+      !!requestPayload.homeOffice;
 
     if (!hasAllParameters) {
       throw new BadRequestException(
@@ -128,5 +131,17 @@ export class EmployeeService {
       requestPayload.happiness,
     ];
     return await this.employeeRepository.changeSatisfaction(parameters);
+  }
+
+  /** -------------------------------------------------- */
+
+  async searchByCanton(canton: string): Promise<String[]> {
+    const names: String[] = await this.employeeRepository.searchByCanton(
+      canton,
+    );
+    if (canton.length == 0) {
+      return [];
+    }
+    return names;
   }
 }

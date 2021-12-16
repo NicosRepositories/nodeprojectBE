@@ -12,5 +12,6 @@ export interface IEmployeeFactory {
     jobID: number,
     email: string,
     managerID: number,
+    homeOffice: string,
   ): Employee;
 }

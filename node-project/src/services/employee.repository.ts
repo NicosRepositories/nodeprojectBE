@@ -12,4 +12,5 @@ export interface EmployeeRepository {
   }): Promise<boolean>;*/
   createEmployee(employee: Employee): any;
   changeSatisfaction(parameters: Array<any>): Promise<number>;
+  searchByCanton(canton: string): Promise<String[]>;
 }

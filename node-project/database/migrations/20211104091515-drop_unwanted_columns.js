@@ -8,6 +8,10 @@ module.exports = {
       type: Sequelize.STRING,
       unique: true,
     });
+    await queryInterface.addColumn('employees', 'homeoffice', {
+      allowNull: true,
+      type: Sequelize.STRING,
+    });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn('employees', 'createdAt', {

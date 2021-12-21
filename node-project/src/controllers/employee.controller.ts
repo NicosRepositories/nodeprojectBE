@@ -106,6 +106,11 @@ export class EmployeeController {
       happiness: await this.employeeService.changeSatisfaction(requestPayload),
     };
   }
+}
+
+@Controller('geo')
+export class GeoController {
+  constructor(private readonly employeeService: EmployeeService) {}
 
   @Get(':canton')
   async searchByCanton(@Param('canton') canton: string) {

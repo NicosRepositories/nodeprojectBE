@@ -3,7 +3,10 @@ import { HttpModule } from '@nestjs/axios';
 
 import { AppController } from 'src/app.controller';
 import { AppService } from 'src/app.service';
-import { EmployeeController } from 'src/controllers/employee.controller';
+import {
+  EmployeeController,
+  GeoController,
+} from 'src/controllers/employee.controller';
 import { JobController } from 'src/controllers/job.controller';
 import { EmployeeService } from 'src/services/employee.service';
 import { JobService } from './services/job.service';
@@ -21,6 +24,7 @@ import { SatisfactionService } from './services/satisfaction.service';
     EmployeeController,
     JobController,
     SatisfactionController,
+    GeoController,
   ],
   providers: [
     AppService,
